@@ -52,3 +52,18 @@ func numberOfVowelsIn(str: String) -> Int {
     return vowelCounter
 }
 numberOfVowelsIn(str: "Annie")
+
+// Capitalize first letter in each word
+func capitalizeFirstLetter(_ str: String) -> String {
+    
+    let words = str.components(separatedBy: " ")
+    var capitalizedStr = ""
+    
+    for word in words {
+        capitalizedStr += (word.capitalized + " ")
+    }
+    
+    capitalizedStr = capitalizedStr.trimmingCharacters(in: CharacterSet(charactersIn: " "))
+    return capitalizedStr
+}
+capitalizeFirstLetter("this is a test string")
