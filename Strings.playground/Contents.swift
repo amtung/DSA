@@ -37,3 +37,18 @@ func reverseStr(str: String) -> String {
 //reversedStr = ""
 //reversedStr = "elpmas"
 reverseStr(str: "sample")
+
+// Count vowels in the string
+func numberOfVowelsIn(str: String) -> Int {
+
+    var vowelCounter: Int = 0
+    let vowels: [Character] = ["a","A","e","E","i","I","o","O","u","U"]
+    
+    for c in str.characters {
+        if vowels.contains(c) {
+            vowelCounter += 1
+        }
+    }
+    return vowelCounter
+}
+numberOfVowelsIn(str: "Annie")
