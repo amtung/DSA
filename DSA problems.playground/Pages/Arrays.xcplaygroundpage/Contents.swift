@@ -5,7 +5,7 @@ import Foundation
 //https://leetcode.com/problems/intersection-of-two-arrays/#/description
 // Given two arrays, write a function to compute their intersection.
 
-// Questions: 
+// Questions:
 // How do we handle negative numbers?
 // How should we order the return array?
 // Do we need to handle arrays of types other than ints?
@@ -60,7 +60,7 @@ func findWords(_ words: [String]) -> [String] {
     }
 }
 
-func findWordsThree(_ words: [String]) -> [String] {
+func findWordsTwo(_ words: [String]) -> [String] {
     let row1: Set<Character> = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"]
     let row2: Set<Character> = ["a", "s", "d", "f", "g", "h", "j", "k", "l"]
     let row3: Set<Character> = ["z", "x", "c", "v", "b", "n", "m"]
@@ -68,7 +68,7 @@ func findWordsThree(_ words: [String]) -> [String] {
     return words.filter { Set($0.lowercased().characters).isSubset(of: row1) || Set($0.lowercased().characters).isSubset(of: row2) || Set($0.lowercased().characters).isSubset(of: row3) }
 }
 
-func findWordsTwo(_ words: [String]) -> [String] {
+func findWordsThree(_ words: [String]) -> [String] {
     let row1: Set<Character> = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"]
     let row2: Set<Character> = ["a", "s", "d", "f", "g", "h", "j", "k", "l"]
     let row3: Set<Character> = ["z", "x", "c", "v", "b", "n", "m"]
@@ -130,7 +130,8 @@ func findWordsFour(_ words: [String]) -> [String] {
     return outputArr
 }
 
-// Given an array of random numbers, Push all the zero’s of a given array to the end of the array. For example, if the given arrays is {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}, it should be changed to {1, 9, 8, 4, 2, 7, 6, 0, 0, 0, 0}. The order of all other elements should be same. 
+// https://leetcode.com/problems/move-zeroes/#/description
+// Given an array of random numbers, Push all the zero’s of a given array to the end of the array. For example, if the given arrays is {1, 9, 8, 4, 0, 0, 2, 7, 0, 6, 0}, it should be changed to {1, 9, 8, 4, 2, 7, 6, 0, 0, 0, 0}. The order of all other elements should be same.
 func moveAllZeroesToEndOfArray(arr: [Int]) -> [Int] {
     var filteredArr = arr.filter{$0 != 0}
     for num in arr {
@@ -142,7 +143,86 @@ func moveAllZeroesToEndOfArray(arr: [Int]) -> [Int] {
 }
 moveAllZeroesToEndOfArray(arr: [1,9,8,4,0,0,2,7,0,6,0])
 
+func moveZeroesTwo(nums: [Int]) -> [Int] {
+    var zeroArr = [Int]()
+    var nonZeroArr = [Int]()
+    for value in nums {
+        if value == 0 {
+            zeroArr.append(value)
+        } else {
+            nonZeroArr.append(value)
+        }
+    }
+    return nonZeroArr + zeroArr
+}
+moveZeroesTwo(nums: [0,23,0,3,52,4,6,0,0,2,0,13])
 
+//iterate through the array
+//for each value, if it is zero, append it to one array
+//if it is nonzero, append it to a different array
+//return the nonzero array + the zero array
+func removeZerosThree(arr: [Int]) -> [Int] {
+    var zeroArr = [Int]()
+    var nonZeroArr = [Int]()
+    for value in arr {
+        if value == 0 {
+            zeroArr.append(value)
+        } else {
+            nonZeroArr.append(value)
+        }
+    }
+    return nonZeroArr + zeroArr
+}
 
+func removeZerosInPlace(arr: inout [Int]) {
+    var zeroFinderIndex = 0
+    var numberFinderIndex = 0
+    while zeroFinderIndex < arr.count && numberFinderIndex < arr.count - 1 {
+        if arr[zeroFinderIndex] == 0 {
+            numberFinderIndex += 1
+            if arr[numberFinderIndex] != 0 {
+                swap(&arr[zeroFinderIndex], &arr[numberFinderIndex])
+            }
+        } else {
+            zeroFinderIndex += 1
+        }
+    }
+}
+var testArr = [1,0,0,0,0,1]
+removeZerosInPlace(arr: &testArr)
+
+func removeZerosHigherOrder(arr: [Int]) -> [Int] {
+    return arr.filter{$0 != 0} + Array(repeating: 0, count: arr.reduce(0){$1 == 0 ? $0 + 1 : $0})
+}
+
+// Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+// Given nums = [2, 7, 11, 15], target = 9,
+// Because nums[0] + nums[1] = 2 + 7 = 9,
+// return [0, 1]
+
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+    var dict = [Int: Int]()
+    for (indexi, numi) in nums.enumerated() {
+        if dict[target - numi] == nil {
+            dict[numi] = indexi
+        } else {
+            return [dict[target - numi]!, indexi]
+        }
+    }
+    return []
+}
+twoSum([2,7,11,15], 9)
+
+// Find the element in an array which occurs more than n/2 times where n is the size of the array
+func majorityElement<T: Hashable>(_ nums: [T]) -> T? {
+    var frequencyDict = [T:Int]()
+    for num in nums {
+        frequencyDict[num] = (frequencyDict[num] ?? 0) + 1
+        if frequencyDict[num]! > nums.count / 2 {
+            return num
+        }
+    }
+    return nil
+}
 
 //: [Next](@next)
