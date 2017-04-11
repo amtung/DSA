@@ -67,3 +67,32 @@ func capitalizeFirstLetter(_ str: String) -> String {
     return capitalizedStr
 }
 capitalizeFirstLetter("this is a test string")
+
+// Given a string, return the first character that appears and doesn't appear anywhere else
+func returnFirstChar(str: String) -> Character? {
+    var dict = [Character:Int]()
+    var arrOfChar = [Character]()
+    guard !str.isEmpty else { return nil }
+    for c in str.characters {
+        if dict[c] == nil {
+            dict[c] = 1
+        } else {
+            dict[c]! += 1
+        }
+    }
+    for (key,value) in dict {
+        if value == 1 {
+            arrOfChar.append(key)
+        }
+    }
+    for c in str.characters {
+        if arrOfChar.contains(c) {
+            return c
+        }
+    }
+    return nil
+}
+var testString = "aardvark"
+print(returnFirstChar(str: testString)!)
+
+
