@@ -96,3 +96,4 @@ var testString = "aardvark"
 print(returnFirstChar(str: testString)!)
 
 
+

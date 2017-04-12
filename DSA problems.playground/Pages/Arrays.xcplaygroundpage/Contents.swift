@@ -255,6 +255,35 @@ func findRelativeRanks(_ nums: [Int]) -> [String] {
     return finalArr
 }
 
+/*Given an array of Ints, write a function that returns an array containing only its unique values. For full credit your solution should be O(n). You do not need to preserve the order.
+ input: [1,2,3,4,5,1,2,3]
+ output: [4,5] (or [5,4])*/
+func uniqueValues(in arr: [Int]) -> [Int] {
+    var returnArr = [Int]()
+    var dict = [Int:Int]()
+    
+    for num in arr {
+        if dict[num] == nil {
+            dict[num] = 1
+        } else {
+            dict[num]! += 1
+        }
+    }
+    for (key,frequency) in dict {
+        if frequency == 1 {
+            returnArr.append(key)
+        }
+    }
+    return returnArr
+}
+print(uniqueValues(in: [1,2,3,4,5,1,2,3]))
+
+
+
+
+
+
+
 
 
 
