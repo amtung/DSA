@@ -255,7 +255,7 @@ func findRelativeRanks(_ nums: [Int]) -> [String] {
     return finalArr
 }
 
-/*Given an array of Ints, write a function that returns an array containing only its unique values. For full credit your solution should be O(n). You do not need to preserve the order.
+/*Given an array of Ints, write a function that returns an array containing only its . For full credit your solution should be O(n). You do not need to preserve the order.
  input: [1,2,3,4,5,1,2,3]
  output: [4,5] (or [5,4])*/
 func uniqueValues(in arr: [Int]) -> [Int] {
@@ -278,12 +278,57 @@ func uniqueValues(in arr: [Int]) -> [Int] {
 }
 print(uniqueValues(in: [1,2,3,4,5,1,2,3]))
 
+/* Given 2 arrays, find the duplicates in the array and return it only once.
+ input: [5,2,2,3,0], [6,2,0,5]
+ output: [5,2,0]
+*/
+func findDuplicates(arr1: [Int], arr2: [Int]) -> [Int] {
+    var returnArr = [Int]()
+    var dict1 = [Int:Int]()
+    var dict2 = [Int:Int]()
+    for num in arr1 {
+        dict1[num] = (dict1[num] ?? 0) + 1
+    }
+    for num in arr2 {
+        dict2[num] = (dict2[num] ?? 0) + 1
+    }
+    for (key, _) in dict1 {
+        if dict2[key] != nil {
+            returnArr.append(key)
+        }
+    }
+    return returnArr
+}
+findDuplicates(arr1: [5,2,2,3,0], arr2: [6,2,0,5])
 
-
-
-
-
-
+// https://leetcode.com/submissions/detail/99901207/
+/*Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note.
+ Note:
+ You may assume that both strings contain only lowercase letters.
+ canConstruct("a", "b") -> false
+ canConstruct("aa", "ab") -> false
+ canConstruct("aa", "aab") -> true*/
+func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+    guard !ransomNote.isEmpty else { return true }
+    var ransomNoteDict = [Character:Int]()
+    var magazineDict = [Character:Int]()
+    for char in ransomNote.characters {
+        ransomNoteDict[char] = (ransomNoteDict[char] ?? 0) + 1
+    }
+    for char in magazine.characters {
+        magazineDict[char] = (magazineDict[char] ?? 0) + 1
+    }
+    for (key, value) in ransomNoteDict {
+        if let magazineValue = magazineDict[key] {
+            if value > magazineValue {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    return true
+}
 
 
 

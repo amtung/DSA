@@ -95,5 +95,34 @@ func returnFirstChar(str: String) -> Character? {
 var testString = "aardvark"
 print(returnFirstChar(str: testString)!)
 
-
-
+// https://leetcode.com/problems/ransom-note/#/description
+/*Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note.
+ 
+Note:You may assume that both strings contain only lowercase letters.
+canConstruct("a", "b") -> false
+canConstruct("aa", "ab") -> false
+canConstruct("aa", "aab") -> true*/
+func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+    guard !ransomNote.isEmpty else { return true }
+    var ransomNoteDict = [Character:Int]()
+    var magazineDict = [Character:Int]()
+    for char in ransomNote.characters {
+        ransomNoteDict[char] = (ransomNoteDict[char] ?? 0) + 1
+    }
+    for char in magazine.characters {
+        magazineDict[char] = (magazineDict[char] ?? 0) + 1
+    }
+    for (key, value) in ransomNoteDict {
+        if let magazineValue = magazineDict[key] {
+            if value > magazineValue {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
+    return true
+}
+print(canConstruct("aa", "aab"))
+print(canConstruct("a", "b"))
+print(canConstruct("aa", "ab"))
