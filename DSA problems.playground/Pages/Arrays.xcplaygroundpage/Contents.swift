@@ -302,7 +302,7 @@ func findDuplicates(arr1: [Int], arr2: [Int]) -> [Int] {
 findDuplicates(arr1: [5,2,2,3,0], arr2: [6,2,0,5])
 
 // https://leetcode.com/submissions/detail/99901207/
-/*Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note.
+/* Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note.
  Note:
  You may assume that both strings contain only lowercase letters.
  canConstruct("a", "b") -> false
@@ -330,6 +330,13 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
     return true
 }
 
+//https://leetcode.com/problems/intersection-of-two-arrays/#/description
+/*Given two arrays, write a function to compute their intersection.
+ Giver num1 = [1,2,2,1], num2: = [2,2], return [2]
+ Note. Each element in the result must be unique, e result can be in any order */
+func findIntersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+    return Array(Set(nums1).intersection(Set(nums2)))
+}
 
 
 
