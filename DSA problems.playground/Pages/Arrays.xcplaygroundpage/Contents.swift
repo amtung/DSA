@@ -281,7 +281,7 @@ print(uniqueValues(in: [1,2,3,4,5,1,2,3]))
 /* Given 2 arrays, find the duplicates in the array and return it only once.
  input: [5,2,2,3,0], [6,2,0,5]
  output: [5,2,0]
-*/
+ */
 func findDuplicates(arr1: [Int], arr2: [Int]) -> [Int] {
     var returnArr = [Int]()
     var dict1 = [Int:Int]()
@@ -337,6 +337,40 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
 func findIntersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
     return Array(Set(nums1).intersection(Set(nums2)))
 }
+
+/* Write a function that checks if a string contains correctly nested/balanced parentheses. The input will only contain the following characters: '(', ')', '[', and/or ']'.
+ Input: "[(])" Output: False
+ Input: "[(())]" Output: True */
+func balancedParens(_ string: String) -> Bool {
+    var array = [Character]()
+    for i in string.characters {
+        if i == "[" || i == "(" {
+            array.append(i)
+        }
+        if i == "]" {
+            let last = array.popLast()
+            if last != "[" {
+                return false
+            }
+        }
+        if i == ")" {
+            let last = array.popLast()
+            if last != "(" {
+                return false
+            }
+        }
+    }
+    if !array.isEmpty {
+        return false
+    }
+    return true
+}
+balancedParens(")(")
+balancedParens("[(])")
+balancedParens("[]([()])")
+balancedParens("(]")
+
+
 
 
 
