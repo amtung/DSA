@@ -40,7 +40,7 @@ reverseStr(str: "sample")
 
 // Count vowels in the string
 func numberOfVowelsIn(str: String) -> Int {
-
+    
     var vowelCounter: Int = 0
     let vowels: [Character] = ["a","A","e","E","i","I","o","O","u","U"]
     
@@ -98,10 +98,10 @@ print(returnFirstChar(str: testString)!)
 // https://leetcode.com/problems/ransom-note/#/description
 /*Given an arbitrary ransom note string and another string containing letters from all the magazines, write a function that will return true if the ransom note can be constructed from the magazines ; otherwise, it will return false. Each letter in the magazine string can only be used once in your ransom note.
  
-Note:You may assume that both strings contain only lowercase letters.
-canConstruct("a", "b") -> false
-canConstruct("aa", "ab") -> false
-canConstruct("aa", "aab") -> true*/
+ Note:You may assume that both strings contain only lowercase letters.
+ canConstruct("a", "b") -> false
+ canConstruct("aa", "ab") -> false
+ canConstruct("aa", "aab") -> true*/
 func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
     guard !ransomNote.isEmpty else { return true }
     var ransomNoteDict = [Character:Int]()
@@ -126,3 +126,74 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
 print(canConstruct("aa", "aab"))
 print(canConstruct("a", "b"))
 print(canConstruct("aa", "ab"))
+
+/*func mostConseqString(arr: [String]) -> String {
+ var result = (string: "", count: 0)
+ for str in arr {
+ var count = 1
+ let chars = [Character](str.characters)
+ for i in 0..<chars.count - 1 {
+ if chars[i] == chars[i+1] {
+ count += 1
+ } else {
+ if count > result.count {
+ result.count = count
+ result.string = str
+ }
+ count = 1
+ }
+ if count > result.count {
+ result.count = count
+ result.string = str
+ }
+ }
+ }
+ return result.string
+ }*/
+
+let str = "testing"
+let chars = [Character](str.characters)
+//Given an array of Strings, find the String with the most repeating characters.
+//Sample input: ["testing", "hello", "apple", "gillless", "abababababa"]
+//Sample output: "gillless"
+func findMostRepeatedCharString(arr: [String]) -> String {
+    var result = (string: "", count: 0)
+    for str in arr {
+        var count = 1
+        let chars = [Character](str.characters)
+        for i in 0..<chars.count - 1 {
+            if chars[i] == chars[i + 1] { // if repeat, add counter by 1
+                count += 1
+            } else {
+                if count > result.count {
+                    result.count = count
+                    result.string = str
+                }
+                count = 1
+            }
+            if count > result.count {
+                result.count = count
+                result.string = str
+            }
+        }
+    }
+    return result.string
+}
+findMostRepeatedCharString(arr: ["testing", "hello", "apple", "gillless", "abababababa"])
+
+/* Valid Palidromes: Given a string, determine if it is a palindrome, considering only alphanumeric characters and ignoring cases.
+ For example,
+ "A man, a plan, a canal: Panama" is a palindrome.
+ "race a car" is not a palindrome.
+ https://leetcode.com/problems/valid-palindrome/#/description */
+func isPalindrome(_ s: String) -> Bool {
+    var revstring = ""
+    
+    for character in s.characters {
+        revstring = String(character) + revstring
+    }
+    return (revstring.lowercased() == s.lowercased())
+}
+isPalindrome("A man, a plan, a canal: Panama")
+isPalindrome("race a car")
+isPalindrome("tacocat")

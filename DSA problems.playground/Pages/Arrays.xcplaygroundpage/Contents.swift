@@ -370,8 +370,40 @@ balancedParens("[(])")
 balancedParens("[]([()])")
 balancedParens("(]")
 
-
-
+// Given an array of integers, find the largest product of 3 integers
+func largestProduct(_ arr: [Int]) -> Int {
+    
+    guard arr.count > 0 else { return 0 }
+    var largest = Int.min
+    var secondLargest = Int.min
+    var thirdLargest = Int.min
+    var temp = 0
+    var oldSecondLargest = 0
+    var product = 0
+    
+    for num in arr {
+        if num > largest {
+            temp = largest
+            largest = num
+            oldSecondLargest = secondLargest
+            secondLargest = temp
+            thirdLargest = oldSecondLargest
+        }
+        else if num > secondLargest {
+            temp = secondLargest
+            secondLargest = num
+            oldSecondLargest = secondLargest
+            thirdLargest = temp
+        }
+        else if num > thirdLargest {
+            thirdLargest = num
+        }
+    }
+    product = largest * secondLargest * thirdLargest
+    return product
+}
+largestProduct([1,0,8,4,2,9,1,3])
+largestProduct([1,3,2,5,4,1,2])
 
 
 
