@@ -465,6 +465,23 @@ func countChars(start: Int, end: Int) -> Int {
 }
 countChars(start: 0, end: 1000)
 
+/* https://leetcode.com/problems/third-maximum-number/
+ Given a non-empty array of integers, return the third maximum number in this array. If it does not exist, return the maximum number. The time complexity must be in O(n).*/
+func thirdMax(_ nums: [Int]) -> Int {
+    var set = Set<Int>()
+    let sortedArr = nums.sorted(by: >)
+    for num in sortedArr {
+        set.insert(num)
+        if set.count == 3 {
+            return num
+        }
+    }
+    return sortedArr[0]
+}
+thirdMax([3,2,1])
+thirdMax([3,4,4])
+
+
 
 
 
