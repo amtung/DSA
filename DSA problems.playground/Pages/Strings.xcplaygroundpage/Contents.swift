@@ -194,8 +194,8 @@ func isPalindrome(_ s: String) -> Bool {
     }
     return (revstring.lowercased() == s.lowercased())
 }
-isPalindrome("A man, a plan, a canal: Panama")
-isPalindrome("race a car")
+//isPalindrome("A man, a plan, a canal: Panama")
+//isPalindrome("race a car")
 isPalindrome("tacocat")
 
 /* Given a word, you need to judge whether the usage of capitals in it is right or not. We define the usage of capitals in a word to be right when one of the following cases holds:
@@ -230,3 +230,27 @@ extension String {
 detectCapitalUse("Google")
 detectCapitalUse("leetcode")
 detectCapitalUse("FlaG")
+
+/* We define the Perfect Number is a positive integer that is equal to the sum of all its positive divisors except itself. Now, given an integer n, write a function that returns true when it is a perfect number and false when it is not.
+ Example:
+ Input: 28
+ Output: True
+ Explanation: 28 = 1 + 2 + 4 + 7 + 14
+ Note: The input number n will not exceed 100,000,000. (1e8)*/
+func divisors(of n: Int) -> [Int] {
+    var divisorArr = [Int]()
+    for currentNum in 1...(n/2) {
+        if n % currentNum == 0 {
+            divisorArr.append(currentNum)
+        }
+    }
+    return divisorArr
+}
+
+func checkPerfectNumber(_ num: Int) -> Bool {
+    return divisors(of: num).reduce(0, +) == num
+}
+print(divisors(of: 28))
+print(divisors(of: 4003945))
+checkPerfectNumber(28)
+checkPerfectNumber(4003945)
