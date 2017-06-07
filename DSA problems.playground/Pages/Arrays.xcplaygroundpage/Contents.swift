@@ -276,7 +276,7 @@ func uniqueValues(in arr: [Int]) -> [Int] {
     }
     return returnArr
 }
-print(uniqueValues(in: [1,2,3,4,5,1,2,3]))
+uniqueValues(in: [1,2,3,4,5,1,2,3])
 
 /* Given 2 arrays, find the duplicates in the array and return it only once.
  input: [5,2,2,3,0], [6,2,0,5]
@@ -480,6 +480,47 @@ func thirdMax(_ nums: [Int]) -> Int {
 }
 thirdMax([3,2,1])
 thirdMax([3,4,4])
+
+// Given an array, do an run length encoding algorithm on it and return an array of subarrays
+func runLengthEncoding(arr: [Int]) -> [(Int, Int)] {
+    var counter = 1
+    var last: Int? = nil
+    var finalArr = [(Int, Int)]()
+    guard !arr.isEmpty else { return [] }
+    for i in arr {
+        if last == nil {
+            last = i
+        } else if last == i {
+            counter += 1
+        } else {
+            finalArr.append((counter, last!))
+            counter = 1
+            last = i
+        }
+    }
+    finalArr.append((counter, last!))
+    return finalArr
+}
+runLengthEncoding(arr: [3,3,3,3,5,5,2,2,2,7])
+runLengthEncoding(arr: [3])
+runLengthEncoding(arr: [])
+
+// Find any one pair of integers that sums up to the target integer
+func findPairSums(arr: [Int], target: Int) -> [Int] {
+    var returnArr = [Int]()
+    for i in 0..<arr.count {
+        for j in 1..<arr.count {
+            if arr[i] + arr[j] == target {
+                returnArr.append(arr[i])
+            }
+        }
+    }
+    return returnArr
+}
+print(findPairSums(arr: [2,4,6,12,10,5,3], target: 11))
+
+
+
 
 
 
