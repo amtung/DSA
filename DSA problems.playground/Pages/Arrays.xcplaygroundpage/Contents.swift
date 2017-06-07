@@ -519,6 +519,31 @@ func findPairSums(arr: [Int], target: Int) -> [Int] {
 }
 print(findPairSums(arr: [2,4,6,12,10,5,3], target: 11))
 
+// The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming distance.
+// https://leetcode.com/problems/hamming-distance/#/description
+/* Input: x = 1, y = 4
+   Output: 2
+
+ Explanation:
+ 1   (0 0 0 1)
+ 4   (0 1 0 0)
+ ↑   ↑
+ The above arrows point to positions where the corresponding bits are different.*/
+func hammingDistance(_ x: Int, _ y: Int) -> Int {
+    
+    var difference = x ^ y
+    var count = 0
+    
+    while difference > 0 {
+        if difference & 1 == 1 {
+            count += 1
+        }
+        difference = difference >> 1
+    }
+    return count
+}
+hammingDistance(1, 4)
+
 
 
 
