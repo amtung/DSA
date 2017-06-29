@@ -517,7 +517,7 @@ func findPairSums(arr: [Int], target: Int) -> [Int] {
     }
     return returnArr
 }
-print(findPairSums(arr: [2,4,6,12,10,5,3], target: 11))
+findPairSums(arr: [2,4,6,12,10,5,3], target: 11)
 
 // The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming distance.
 // https://leetcode.com/problems/hamming-distance/#/description
@@ -544,10 +544,24 @@ func hammingDistance(_ x: Int, _ y: Int) -> Int {
 }
 hammingDistance(1, 4)
 
-
-
-
-
+/* Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You may assume no duplicates in the array.
+ Here are few examples.
+ [1,3,5,6], 5 → 2
+ [1,3,5,6], 2 → 1
+ [1,3,5,6], 7 → 4
+ [1,3,5,6], 0 → 0*/
+func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+    for index in 0..<nums.count {
+        if nums[index] >= target {
+            return index
+        }
+    }
+    return nums.count
+}
+searchInsert([1,3,5,6], 5)
+searchInsert([1,3,5,6], 2)
+searchInsert([1,3,5,6], 7)
+searchInsert([1,3,5,6], 0)
 
 
 

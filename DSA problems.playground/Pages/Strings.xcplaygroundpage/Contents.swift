@@ -254,3 +254,11 @@ print(divisors(of: 28))
 print(divisors(of: 4003945))
 checkPerfectNumber(28)
 checkPerfectNumber(4003945)
+
+// Given two strings, write a function that returns true if the supplied strings are anagrams of one another.
+func isAnagram(str1: String, str2: String) -> Bool {
+    let strOne = str1.characters.sorted(by: <)
+    let strTwo = str2.characters.sorted(by: <)
+    return strOne == strTwo
+}
+isAnagram(str1: "listen", str2: "silent")
