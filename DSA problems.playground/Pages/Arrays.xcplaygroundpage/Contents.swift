@@ -575,7 +575,7 @@ func recursiveFib(_ n: Int) -> Int {
     guard n != 1 else { return 1 }
     return recursiveFib(n - 1) + recursiveFib(n - 2)
 }
-print(recursiveFib(3))
+recursiveFib(3)
 
 /* Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You may assume no duplicates in the array.
  Here are few examples.
@@ -633,32 +633,25 @@ getMaxProfit(stockPrices: [10, 7, 5, 8, 11, 9])
 // find permutation
 func permute(_ nums: [Int]) -> [[Int]] {
     
-    var permutations = [[Int]]()
-    var newPermSets = [Int]()
-    newPermSets.insert(nums[0], at: 0)
-    permutations.append(newPermSets)
+    var permutations = [[nums[0]]]
     
     for n in nums[1]...nums.count {
-        newPermSets = [Int]()
+        var newPermSets = [[Int]]()
         
         for perm in permutations {
-            var perm = perm
-            print("insert things to: \(perm)")
             
             for i in 0...perm.count {
-                print("insert the new number \(n) at index \(i)")
+                var perm = perm
                 
                 perm.insert(n, at: i)
-                print("newPermSet: \(perm)")
-                permutations.append(perm)
+                newPermSets.append(perm)
                 print(permutations)
             }
-            perm = newPermSets
         }
+        permutations = newPermSets
     }
     return permutations
 }
-//permute([1,2,3])
-
+print(permute([1,2,3]))
 
 //: [Next](@next)
