@@ -52,15 +52,13 @@ func findSubsets(arr: [Int], emptyArr: [[Int]]) -> [[Int]] {
 }
 print(findSubsets(arr: [1,2,3], emptyArr: [[]]))
 
-// Write a function findPerms that receives a string and returns an array with all the permutations that can be made from the characters in the string.
-func findPerm(str: String) -> [String] {
-    var returnArr = [""]
-    //    var stringABC = "abc"
-    //    var rest = stringABC.remove(at: 0)
-    //    print(rest)
-    return returnArr
+// recursive fib sequence
+func recursiveFib(_ n: Int) -> Int {
+    guard n >= 0 else { return 0 }
+    guard n != 1 else { return 1 }
+    return recursiveFib(n - 1) + recursiveFib(n - 2)
 }
-
+print(recursiveFib(3))
 
 
 //: [Next](@next)

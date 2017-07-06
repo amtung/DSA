@@ -522,8 +522,8 @@ findPairSums(arr: [2,4,6,12,10,5,3], target: 11)
 // The Hamming distance between two integers is the number of positions at which the corresponding bits are different. Given two integers x and y, calculate the Hamming distance.
 // https://leetcode.com/problems/hamming-distance/#/description
 /* Input: x = 1, y = 4
-   Output: 2
-
+ Output: 2
+ 
  Explanation:
  1   (0 0 0 1)
  4   (0 1 0 0)
@@ -544,6 +544,39 @@ func hammingDistance(_ x: Int, _ y: Int) -> Int {
 }
 hammingDistance(1, 4)
 
+// You are climbing a stair case. It takes n steps to reach to the top. Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top? Note: Given n will be a positive integer.
+func climbStairs(_ n: Int) -> Int {
+    var returnInt = 0
+    if n == 1 {
+        return 1
+    }
+    if n == 2 {
+        return 2
+    }
+    guard n > 0 else { return n }
+    var sum = 2
+    var left = 1
+    var right = 1
+    
+    for _ in 2...n {
+        sum = left + right
+        left = right
+        right = sum
+    }
+    return sum
+}
+climbStairs(3)
+climbStairs(4)
+climbStairs(5)
+climbStairs(13)
+
+func recursiveFib(_ n: Int) -> Int {
+    guard n >= 0 else { return 0 }
+    guard n != 1 else { return 1 }
+    return recursiveFib(n - 1) + recursiveFib(n - 2)
+}
+print(recursiveFib(3))
+
 /* Given a sorted array and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order. You may assume no duplicates in the array.
  Here are few examples.
  [1,3,5,6], 5 → 2
@@ -563,6 +596,69 @@ searchInsert([1,3,5,6], 2)
 searchInsert([1,3,5,6], 7)
 searchInsert([1,3,5,6], 0)
 
+/* Write an efficient function that takes stockPricesYesterday and returns the best profit I could have made from 1 purchase and 1 sale of 1 Apple stock yesterday. No "shorting"—you must buy before you sell. You may not buy and sell in the same time step (at least 1 minute must pass).
+ let stockPricesYesterday = [10, 7, 5, 8, 11, 9]
+ getMaxProfit(from: stockPricesYesterday) // returns 6 (buying for $5 and selling for $11) */
+func getMaxProfit(stockPrices arr: [Int]) -> Int {
+    var maxProfit = 0
+    
+    for earlierTime in 0..<arr.count {
+        let earlierPrice = arr[earlierTime]
+        
+        for laterTime in 1..<arr.count {
+            let laterPrice = arr[laterTime]
+            
+            let potentialProfit = laterPrice - earlierPrice
+            maxProfit = max(maxProfit, potentialProfit)
+        }
+    }
+    return maxProfit
+}
+getMaxProfit(stockPrices: [10, 7, 5, 8, 11, 9])
+
+/*Given a collection of distinct numbers, return all possible permutations.
+ For example,
+ [1,2,3] have the following permutations:
+ 
+ [
+ [1,2,3],
+ [1,3,2],
+ [2,1,3],
+ [2,3,1],
+ [3,1,2],
+ [3,2,1]
+ ]
+ https://leetcode.com/problems/permutations/#/solutions*/
+
+// find permutation
+func permute(_ nums: [Int]) -> [[Int]] {
+    
+    var permutations = [[Int]]()
+    var newPermSets = [Int]()
+    newPermSets.insert(nums[0], at: 0)
+    permutations.append(newPermSets)
+    
+    for n in nums[1]...nums.count {
+        newPermSets = [Int]()
+        
+        for perm in permutations {
+            var perm = perm
+            print("insert things to: \(perm)")
+            
+            for i in 0...perm.count {
+                print("insert the new number \(n) at index \(i)")
+                
+                perm.insert(n, at: i)
+                print("newPermSet: \(perm)")
+                permutations.append(perm)
+                print(permutations)
+            }
+            perm = newPermSets
+        }
+    }
+    return permutations
+}
+//permute([1,2,3])
 
 
 //: [Next](@next)
